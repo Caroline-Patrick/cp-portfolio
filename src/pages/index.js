@@ -1,4 +1,5 @@
 import * as React from "react";
+import '@fontsource/inter';
 import Layout from "../components/Layout/index.js";
 
 
