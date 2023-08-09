@@ -36,7 +36,7 @@ const ProjectList = () => {
                         }
                       }
                     }
-                    object(expression: "master:README.md") {
+                    object(expression: "main:README.md") {
                       ... on GitHub_Blob {
                         id
                         text
@@ -66,7 +66,7 @@ const ProjectList = () => {
     if (repoNameMatch) {
       const username = repoNameMatch[1];
       const repoName = repoNameMatch[2];
-      const baseRawUrl = `https://raw.githubusercontent.com/${username}/${repoName}/master/`;
+      const baseRawUrl = `https://raw.githubusercontent.com/${username}/${repoName}/main/`;
       return baseRawUrl + gifPath;
     }
     return null;
