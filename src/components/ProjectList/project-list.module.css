@@ -12,7 +12,7 @@ ul {
 
 li {
   margin-bottom: 0.8rem;
-  background-color: #f7f7f7;   /* A very light grey background for each repository item */
+  background-color: transparent;   /* A very light grey background for each repository item */
   padding: 0.5rem;
   border-radius: 4px;
 }
@@ -30,4 +30,8 @@ a {
 
 a:hover {
   color: #555; /* Slight change in color for hover effect */
+}
+
+.projectCards {
+  margin-bottom: 1rem;
 }

@@ -1,9 +1,8 @@
 import * as React from "react";
-import {Chip, Card} from '@mui/joy';
+import { Button, Chip, Card, CardContent, Typography } from "@mui/joy";
 import { useStaticQuery, graphql } from "gatsby";
 import styles from "./project-list.module.css";
-import {heading} from '../Layout/layout.module.css';
-
+import { heading } from "../Layout/layout.module.css";
 
 const ProjectList = () => {
   const data = useStaticQuery(
@@ -62,7 +61,9 @@ const ProjectList = () => {
   };
 
   const constructGifUrl = (repoUrl, gifPath) => {
-    const repoNameMatch = repoUrl.match(/https:\/\/github\.com\/(.*?)\/(.*?)(\/|$)/);
+    const repoNameMatch = repoUrl.match(
+      /https:\/\/github\.com\/(.*?)\/(.*?)(\/|$)/
+    );
     if (repoNameMatch) {
       const username = repoNameMatch[1];
       const repoName = repoNameMatch[2];
@@ -71,46 +72,72 @@ const ProjectList = () => {
     }
     return null;
   };
-  
 
   return (
     <div>
+      <hr></hr>
+
       <ul>
         {repos.map((repo) => {
           if (!repo.node || !repo.node.repositoryTopics) {
             console.error("No repositoryTopics found for:", repo);
-            return null; 
+            return null;
           }
 
           const repoTopics = repo.node.repositoryTopics.nodes;
-          const gifPath = repo.node.object && repo.node.object.text ? extractGifPath(repo.node.object.text) : null;
-          const absoluteGifUrl = gifPath ? constructGifUrl(repo.node.url, gifPath) : null;
-          
+          const gifPath =
+            repo.node.object && repo.node.object.text
+              ? extractGifPath(repo.node.object.text)
+              : null;
+          const absoluteGifUrl = gifPath
+            ? constructGifUrl(repo.node.url, gifPath)
+            : null;
 
           return (
-            <Card key={repo.node.id}>
-              <li>
-                <h2 className={heading}>
-                  <a href={repo.node.url}>{repo.node.name}</a>
-                </h2>
-                <p>{repo.node.description}</p>
-                
-                {absoluteGifUrl && <img src={absoluteGifUrl} alt="Repository demo GIF" />}
-
-                {repoTopics.map((topicNode) => (
-                  <Chip  
+            <Card
+              className="projectCards"
+              sx={{ margin: 10 }}
+              variant="soft"
+              key={repo.node.id}
+            >
+              <CardContent>
+                <li>
+                  <Typography level="title-md" className={heading}>
+                    <a href={repo.node.homepageUrl}>{repo.node.name}</a>
+                  </Typography>
+                  <Typography sx={{ marginBottom: 5 }}>
+                    {repo.node.description}
+                  
+<br></br>
+<br></br>
+                  <a href={repo.node.url} style={{ textDecoration: "none" }} target="_blank" rel="noopener noreferrer">
+                    <Button color="neutral">View on GitHub</Button>
+                  </a>
+            
+                  </Typography>
+                  {absoluteGifUrl && (
+                    <img src={absoluteGifUrl} alt="Repository demo GIF" />
+                  )}
+<br></br>
+                  {repoTopics.map((topicNode) => (
+                    <Chip
                     sx={{
-                      "--Chip-minHeight": "15px",
-                      "--Chip-paddingInline": "20px",
-                      "--Chip-radius": "10px",
-                      "--Chip-gap": "10px"
-                    }} 
-                    key={topicNode.topic.name}
-                  >
-                    {topicNode.topic.name}
-                  </Chip>
-                ))}
-              </li>
+                      backgroundColor: '#2f3e46', 
+                      color: '#cad2c5',
+                        "--Chip-minHeight": "15px",
+                        "--Chip-paddingInline": "20px",
+                        "--Chip-radius": "10px",
+                        "--Chip-gap": "10px",
+                        "--Chip-margin": "2px",
+                      }}
+                      key={topicNode.topic.name}
+                    >
+                      {topicNode.topic.name}
+                      
+                    </Chip>
+                  ))}
+                </li>
+              </CardContent>
             </Card>
           );
         })}

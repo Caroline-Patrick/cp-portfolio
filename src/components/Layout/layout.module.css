@@ -8,8 +8,7 @@ h1, h2, h3, p, ul, ol {
   max-width: 800px;
   margin: 0 auto;
   font-family: Arial, sans-serif;
-  background-color: #ffffff;
-  color: #333;
+  color: #cad2c5;
 }
 
 /* Navigation */
@@ -33,7 +32,7 @@ nav {
 
 .navLinkText {
   text-decoration: none;
-  color: #333;
+  color: #cad2c5;
   font-size: 1.1rem;
   transition: color 0.3s;
 }
@@ -47,5 +46,21 @@ nav {
   font-size: 2.5rem;
   margin-top: 0;
   margin-bottom: 1.5rem;
-  color: #444;
+  color: #cad2c5;
+}
+
+body{
+  background: #2f3e46;
+  color: #cad2c5;
+
+  
+}
+
+.homeTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* This will make the container take up the full viewport height */
+  text-align: center;
 }
